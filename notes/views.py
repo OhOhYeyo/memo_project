@@ -32,3 +32,20 @@ def note_create(request):
 def note_detail(request, pk):
     note = get_object_or_404(Note, pk=pk)
     return render(request, "notes/note_detail.html", {"note": note})
+
+
+# 메모장 수정하기
+def note_edit(request, pk):
+    note = get_object_or_404(Note, pk=pk)
+    # 메모장을 사용자가 수정을 완료햇을 때
+    if request.method == "POST":
+        # 수정
+        form = NoteForm(request.POST, instance=note)
+        # 유효성 검사
+        if form.is_valid():
+            form.save()  # 데이터베이스 저장
+            # fedirect('url'): url 주소로 이동
+            return redirect("note_detail", pk=note.pk)
+    else:
+        form = NoteForm(instance=note)
+        return render(request, "notes/note_create.html", {"form": form})

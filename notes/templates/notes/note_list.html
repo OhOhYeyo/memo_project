@@ -3,9 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Neon Memo</title>
 </head>
 <style>
+
+
+
+    body {
+        background: linear-gradient(135deg, #f06, #ffba00) !important;
+        font-family: Arial, sans-serif;
+        color: white; /* 텍스트 색상 */
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column; /* 세로 방향으로 정렬 */
+        align-items: center; /* 가로 중앙 정렬 */
+    }
+
+    img {
+        width: 60%; /* 화면의 80% 크기로 설정 */
+        max-width: 300px; /* 최대 크기 600px */
+        margin-bottom: 20px; /* 이미지와 텍스트 사이의 간격 */
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    }
+
     @font-face {
             font-family: 'ANDONG264TTF';
         src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2502-1@1.0/ANDONG264TTF.woff2') format('woff2');
@@ -18,43 +40,113 @@
         font-size: 70px;
     }
 
-    div {
-        background-color: #e409d9;
+   /* div {
+        background: linear-gradient(135deg, #ff7f50, #ff1493);
     }
-
+*/
     a {
         text-decoration-line: none;
         text-decoration-style: wavy;
     }
 
     .memo-create {
-        background-color: aqua;
+        background-color: gray;
         text-decoration-line: none;
         font-size: 40px;
+        border-radius: 10px;
+        margin-bottom: 30px;
+        /* margin: 20px 10px 0 5px; /*위 오른쪽 아래 왼쪽*/
+        /*padding: 30px;*/
     }
 
     .memo-list {
-        background-color: bisque;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 20px;
+
     }
 
-    table {
-        border: 1px;
-        border-color: black;
+    .memo {
+        background: linear-gradient(135deg, #ff7f50, #ff1493);
+        border: 2px solid black;
+        text-align: center;
+        margin: 20px; /* 간격을 넓히기 위해 margin을 추가 */
+        width: 250px; /* 각 메모의 너비를 설정 */
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 약간의 그림자 추가 */
     }
+
+    @keyframes animate1 {
+        0% { left: -100%; }
+        50%, 100% { left: 100%; }
+    }
+
+    @keyframes animate2 {
+        0% { top: -100%; }
+        50%, 100% { top: 100%; }
+    }
+
+    @keyframes animate3 {
+        0% { right: -100%; }
+        50%, 100% { right: 100%; }
+    }
+
+    @keyframes animate4 {
+        0% { bottom: -100%; }
+        50%, 100% { bottom: 100%; }
+    }
+
+    a:hover {
+        background: linear-gradient(135deg, #9b4dff, #ec561a);
+        color: #050801;
+        box-shadow: 0 0 5px #ec561a, 0 0 25px #ec561a, 0 0 50px #ec561a, 0 0 200px #ec561a;
+        -webkit-box-reflect: below 1px linear-gradient(transparent, #0005);
+    }
+
+    /* 메모의 링크에 커서를 올렸을 때 부드러운 오렌지와 핑크 색상으로 변경 */
+    .memo a:hover {
+    color: black; /* 글자 색을 검정색으로 */
+    box-shadow: 0 0 10px #ca23c2; /* 오렌지 색 그림자 */
+    }
+
+    a:nth-child(1) {
+        filter: hue-rotate(270deg);
+    }
+    a:nth-child(2) {
+        filter: hue-rotate(110deg);
+    }
+
 </style>
-<body>
-    <h1>메모장</h1>
-    <div class="memo-create">
-    <a href="{% url 'note_create' %}">메모생성</a><br>
-    </div>
+<h1>메모장</h1>
+<body style="justify-content: center; align-items: center; height: 100vh; background: #f1f1ef; font-family: 'Raleway', sans-serif; font-weight: bold;">
+
+
+    <img src="https://th.bing.com/th/id/OIP.NDWl_Kc92BKWDDehYb0e3AHaEJ?w=262&h=180&c=7&r=0&o=5&pid=1.7" alt="My Image" />
+
+
+    <a href="{% url 'note_create' %}"
+    style="justify-content: center; align-items: center; position: relative; display: inline-block; padding: 25px 30px; margin: 0; color: #ca23c2; text-decoration: none; text-transform: uppercase; transition: 0.5s; letter-spacing: 4px; overflow: hidden; margin-right: 50px;">
+     <span style="position: absolute; display: block; top: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, transparent, #ca23c2); animation: animate1 1s linear infinite;"></span>
+     <span style="position: absolute; display: block; top: -100%; right: 0; width: 2px; height: 100%; background: linear-gradient(180deg, transparent, #ca23c2); animation: animate2 1s linear infinite; animation-delay: 0.25s;"></span>
+     <span style="position: absolute; display: block; bottom: 0; right: 0; width: 100%; height: 2px; background: linear-gradient(270deg, transparent, #ca23c2); animation: animate3 1s linear infinite; animation-delay: 0.50s;"></span>
+     <span style="position: absolute; display: block; bottom: -100%; left: 0; width: 2px; height: 100%; background: linear-gradient(360deg, transparent, #ca23c2); animation: animate4 1s linear infinite; animation-delay: 0.75s;"></span>
+     메모생성
+ </a>
+    
+
     <div class ="memo-list">
-        <table>
-            <td>
-    {% for note in notes %}
-    <a href="http://127.0.0.1:8000/list/{{ note.id }}"> {{note}}</a><br>
-    {% endfor %}
-</td>
-</table>
+        {% for note in notes %}
+        <div class="memo"><a href="http://127.0.0.1:8000/list/{{ note.id }}"> {{note}}</a></div><br>
+        {% endfor %}
+
     </div>
+    <div>
+        <div>
+
+        </div>
+    </div>
+
 </body>
 </html>
