@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    @font-face {
+            font-family: 'ANDONG264TTF';
+        src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2502-1@1.0/ANDONG264TTF.woff2') format('woff2');
+        font-weight: normal;
+        font-style: normal;
+    }
+           
+    h1{
+        font-family: 'ANDONG264TTF';
+        font-size: 70px;
+    }
+
+    div {
+        background-color: #e409d9;
+    }
+
+    a {
+        text-decoration-line: none;
+        text-decoration-style: wavy;
+    }
+
+    .memo-create {
+        background-color: aqua;
+        text-decoration-line: none;
+        font-size: 40px;
+    }
+
+    .memo-list {
+        background-color: bisque;
+    }
+
+    table {
+        border: 1px;
+        border-color: black;
+    }
+</style>
+<body>
+    <h1>메모장</h1>
+    <div class="memo-create">
+    <a href="{% url 'note_create' %}">메모생성</a><br>
+    </div>
+    <div class ="memo-list">
+        <table>
+            <td>
+    {% for note in notes %}
+    <a href="http://127.0.0.1:8000/list/{{ note.id }}"> {{note}}</a><br>
+    {% endfor %}
+</td>
+</table>
+    </div>
+</body>
+</html>
