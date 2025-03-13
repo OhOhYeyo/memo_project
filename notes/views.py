@@ -49,3 +49,10 @@ def note_edit(request, pk):
     else:
         form = NoteForm(instance=note)
         return render(request, "notes/note_create.html", {"form": form})
+
+
+# 메모장 삭제하기
+def note_delete(request, pk):
+    note = get_object_or_404(Note, pk=pk)
+    note.delete()  # 데이터베이스 삭제
+    return redirect("note_list")

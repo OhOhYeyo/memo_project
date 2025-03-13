@@ -3,16 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>메모 상세</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #f06, #ffba00);
+            font-family: Arial, sans-serif;
+            color: white;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            width: 80%;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        @font-face {
+            font-family: 'ANDONG264TTF';
+        src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2502-1@1.0/ANDONG264TTF.woff2') format('woff2');
+        font-weight: normal;
+        font-style: normal;
+    }
+        h1 {
+            font-family: 'ANDONG264TTF';
+            font-size: 40px;
+            margin-bottom: 30px;
+        }
+        .note-info {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        .btn-container {
+            display: flex;
+            justify-content: space-between;
+        }
+        .btn {
+            background: linear-gradient(135deg, #9b4dff, #ec561a);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+        .btn:hover {
+            background: linear-gradient(135deg, #ec561a, #9b4dff);
+            box-shadow: 0 0 5px #ec561a, 0 0 25px #ec561a;
+        }
+    </style>
 </head>
 <body>
-    {{note.title}} <br>
-    {{note.context}} <br>
-    {{note.create_at}} <br>
-    <a href="{% url 'note_edit' note.pk %}">수정</a> <br>
-    <button>
-    <a href="http://127.0.0.1:8000/list">목록으로 돌아가기</a>
-</button>
-
+    <div class="container">
+        <h1>메모 상세</h1>
+        <div class="note-info">
+            <strong>제목:</strong> {{ note.title }} <br>
+            <strong>내용:</strong> {{ note.context }} <br>
+            <strong>작성일:</strong> {{ note.create_at }} <br>
+        </div>
+        <div class="btn-container">
+            <a class="btn" href="{% url 'note_edit' note.pk %}">수정</a>
+            <a class="btn" href="http://127.0.0.1:8000/list">목록으로 돌아가기</a>
+        </div>
+    </div>
 </body>
 </html>

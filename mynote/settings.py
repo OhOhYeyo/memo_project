@@ -10,6 +10,28 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
+import os, json
+from django.core.exceptions import ImproperlyConfigured
+
+# 경로를 찾는 코드
+secret_file = os.path.join(BASE_DIR, "secret.json")  # secrets.json 파일 위치
+
+# json 파일을 여는 코드
+with open(secret_file) as f:
+    secrets = json.loads(f.read())
+
+
+# secret key 충족하지 않는 경우 에러 메시지 뜬다.
+def get_secret(setting, secrets=secrets):
+    try:
+        return secrets[setting]
+    except KeyError:
+        error_msg = "Set the {} environment variable".format(setting)
+        raise ImproperlyConfigured(error_msg)
+
+
+SECRET_KEY = get_secret("SECRET_KEY")
+
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -20,12 +42,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-4s2q!#v7)j1+8jkwpwa0)@t=mv3!i!lc&b^sx55m&4do@!4jsq"
 
+# SECRET_KEY = "django-insecure-4s2q!#v7)j1+8jkwpwa0)@t=mv3!i!lc&b^sx55m&4do@!4jsq"
+SECRET_KEY = get_secret("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
-ALLOWED_HOSTS = []
+DEBUG = True  # 배포시에 false로 변경
+
+ALLOWED_HOSTS = ["*"]  # 외부 권한
 
 
 # Application definition

@@ -7,8 +7,6 @@
 </head>
 <style>
 
-
-
     body {
         background: linear-gradient(135deg, #f06, #ffba00) !important;
         font-family: Arial, sans-serif;
@@ -38,6 +36,7 @@
     h1{
         font-family: 'ANDONG264TTF';
         font-size: 70px;
+        margin-bottom: 20px;
     }
 
    /* div {
@@ -118,13 +117,14 @@
         filter: hue-rotate(110deg);
     }
 
+    .note-delete {
+        color: red;
+    }
 </style>
 <h1>메모장</h1>
 <body style="justify-content: center; align-items: center; height: 100vh; background: #f1f1ef; font-family: 'Raleway', sans-serif; font-weight: bold;">
 
-
     <img src="https://th.bing.com/th/id/OIP.NDWl_Kc92BKWDDehYb0e3AHaEJ?w=262&h=180&c=7&r=0&o=5&pid=1.7" alt="My Image" />
-
 
     <a href="{% url 'note_create' %}"
     style="justify-content: center; align-items: center; position: relative; display: inline-block; padding: 25px 30px; margin: 0; color: #ca23c2; text-decoration: none; text-transform: uppercase; transition: 0.5s; letter-spacing: 4px; overflow: hidden; margin-right: 50px;">
@@ -135,17 +135,14 @@
      메모생성
  </a>
     
-
     <div class ="memo-list">
         {% for note in notes %}
-        <div class="memo"><a href="http://127.0.0.1:8000/list/{{ note.id }}"> {{note}}</a></div><br>
+        <div class="memo">
+            <a class= "note-title", href="http://127.0.0.1:8000/list/{{ note.id }}"> {{note}}</a> <br>
+            <a class= "note-delete", href="{% url 'note_delete' note.pk%}">삭제</a><br>
+        </div>
         {% endfor %}
 
-    </div>
-    <div>
-        <div>
-
-        </div>
     </div>
 
 </body>
